@@ -1,0 +1,24 @@
+/* color scheme: (white)#FFFFFFF, (beige)#F0E4D8, (orange)#FEC195, (pink)#F1C7B9, (coral)#E08F71, (green)#BDC7AD */
+/* fonts: title and/or headings = font-family: 'Shadows Into Light Two', cursive; paragraphs and/or headings = font-family: 'Quicksand', sans-serif; */
+
+body {
+    background-color: #f0e4d8;
+    font-family: 'Quicksand', sans-serif;
+}
+
+header {
+    background-color: #bdc7ad;
+    text-align: center;
+    padding: .5em;
+    font-size: 1.5em;
+}
+
+h1{
+    margin: 0;
+    font-family: 'Shadows Into Light Two', cursive;
+    color: #1d3e2c;
+}
+
+header a {
+    color: #ffffff;
+}
