@@ -6,14 +6,6 @@ body {
     font-family: 'Quicksand', sans-serif;
 }
 
-header {
-    background-color: #bdc7ad;
-    padding: .5em;
-    font-size: 1.5em;
-    border-bottom-left-radius: 10%;
-    border-bottom-right-radius: 10%;
-    border-bottom: 2px solid white;
-}
 
 h1{
     margin: 0;
@@ -21,20 +13,30 @@ h1{
     color: #1d3e2c;
 }
 
-header a {
-    color: #ffffff;
-}
+
 
 /* classes */
 .center {
     text-align: center;
 }
 
+.header a {
+    color: #ffffff;
+}
+
+.header {
+    background-color: #bdc7ad;
+    padding: .5em;
+    font-size: 1.3em;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    border-bottom: 2px solid white;
+}
 
 
 
 
-DESKTOP VIEW (OVER 1100PX SCREEN)
+/* DESKTOP VIEW (OVER 1100PX SCREEN) */
 @media (min-width:1100px) {
 
 
