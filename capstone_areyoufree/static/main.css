@@ -10,6 +10,9 @@ header {
     background-color: #bdc7ad;
     padding: .5em;
     font-size: 1.5em;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    border-bottom: 2px solid white;
 }
 
 h1{
@@ -22,6 +25,17 @@ header a {
     color: #ffffff;
 }
 
+/* classes */
 .center {
     text-align: center;
+}
+
+
+
+
+
+DESKTOP VIEW (OVER 1100PX SCREEN)
+@media (min-width:1100px) {
+
+
 }

@@ -11,6 +11,10 @@ header {
     text-align: center;
     padding: .5em;
     font-size: 1.5em;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    border-bottom: 2px solid white;
+    padding-top: 2em;
 }
 
 h1{
@@ -19,6 +23,68 @@ h1{
     color: #1d3e2c;
 }
 
-header a {
-    color: #ffffff;
+
+/* ids */
+#login-btn {
+    text-align: center;
+}
+
+#login-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -40%;
+    margin-left: -38%;
+    background-color: white;
+    padding: 1em;
+    box-shadow: 0px 0px 10px 5px #c4b09c;
+}
+
+#oops-signup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: 20%;
+    margin-left: -32%;
+    text-align: center;
+}
+
+#oops-signup a {
+    color: #E08F71;
+}
+
+
+
+
+
+
+/* DESKTOP VIEW (OVER 1100PX SCREEN) */
+@media (min-width: 1100px) {
+
+    #login-form {
+        position: fixed;
+        top: 60%;
+        left: 50%;
+        margin-top: -10%;
+        margin-left: -11%;
+        background-color: white;
+        padding: 2em;
+    }
+
+    header {
+        background-color: #bdc7ad;
+        text-align: center;
+        padding: .5em;
+        font-size: 1.5em;
+        border-bottom: 2px solid white;
+        padding-top: 2em;
+    }
+
+    #oops-signup {
+        position: fixed;
+        top: 60%;
+        left: 69%;
+        margin-top: 7%;
+        text-align: center;
+    }
 }

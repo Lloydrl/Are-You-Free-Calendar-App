@@ -14,13 +14,17 @@
 <body>
     <header>
         <h1>Sign Up!</h1>
+        <p>Welcome to Are You Free? Calendar!</p>
     </header>
     <main>
-        <p>Welcome to Are You Free? Calendar!</p>
+        <p class="center">Please fill out the following information fields to create your very own calendar!</p>
+        <div id="oops-login">
+            <p>Oops! Already have a calendar? <a href="{% url 'login' %}">Login here!</a></p>
+        </div>
         <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Sign Up">
+            <div id="signup-btn"><input type="submit" value="Sign Up!"></div>
         </form>
     </main>
 </body>

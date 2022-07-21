@@ -17,11 +17,17 @@
         <p>Hello! Welcome back.</p>
     </header>
     <main>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Login">
-        </form>
+        <div id="login-form">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div id="login-btn"><input type="submit" value="Login"></div>
+            </form>
+        </div>
+        <div id="oops-signup">
+            <p>Oops! Don't have a calendar yet?</p>
+            <p><a href="{% url 'users:signup' %}">Sign up here!</a></p>
+        </div>
     </main>
 </body>
 </html>

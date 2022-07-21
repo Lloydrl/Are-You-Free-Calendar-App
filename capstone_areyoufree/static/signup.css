@@ -11,6 +11,10 @@ header {
     text-align: center;
     padding: .5em;
     font-size: 1.5em;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    border-bottom: 2px solid white;
+    padding-top: 1em;
 }
 
 h1{
@@ -21,4 +25,40 @@ h1{
 
 header a {
     color: #ffffff;
+}
+
+form {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+
+/* ids */
+#signup-btn {
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 2em;
+}
+
+#oops-login {
+    text-align: center;
+    font-size: .8em;
+}
+
+#oops-login a{
+    color: #E08F71;
+}
+
+
+/* classes */
+.center {
+    text-align: center;
+}
+
+
+
+
+/* DESKTOP VIEW (OVER 1100PX SCREEN) */
+@media (mun-width: 1100px) {
+
 }
