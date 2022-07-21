@@ -17,6 +17,7 @@
         <p>Hello! Welcome back.</p>
     </header>
     <main>
+        <div id="login-center">
         <div id="login-form">
             <form action="" method="post">
                 {% csrf_token %}
@@ -27,6 +28,7 @@
         <div id="oops-signup">
             <p>Oops! Don't have a calendar yet?</p>
             <p><a href="{% url 'users:signup' %}">Sign up here!</a></p>
+        </div>
         </div>
     </main>
 </body>
