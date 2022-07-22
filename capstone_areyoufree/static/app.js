@@ -5,7 +5,7 @@ import weekofYear from dayjs/plugin/weekofYear
 Vue.component('month-indicator', {
     template:
         <div>
-            {/* calendar date indicator (July 2019) */}
+            {{ selectedMonth }}
         </div>
     ,
 })
@@ -35,7 +35,9 @@ Vue.component('day', {
 new Vue ({
     el: '#app',
     data: {
-
+        days: [],
+        months: [],
+        years: [],
     },
     methods: {
 

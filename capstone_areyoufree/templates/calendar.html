@@ -1,10 +1,14 @@
 {% extends 'home.html' %}
 
 <div>
-    <month-indicator></month-indicator>
-    <month-selector></month-selector>
+    <div>
+        <month-indicator></month-indicator>
+        <month-selector></month-selector>
+    </div>
     <weekdays></weekdays>
-    <day></day>
+    <ol class="days-grid">
+        <day></day>
+    </ol>
 </div>
 
 {% block content %}
