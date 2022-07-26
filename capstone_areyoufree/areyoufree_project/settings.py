@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 
     #My Apps
     'users',
+    'events',
     'apis',
 
     'rest_framework',
@@ -133,6 +134,6 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'base'
+LOGOUT_REDIRECT_URL = 'base'
 LOGIN_URL = 'login'
