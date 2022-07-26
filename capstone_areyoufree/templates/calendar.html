@@ -2,6 +2,35 @@
 
 {% block content %}
 
+<div id="container">
+    <div id="header">
+        <div id="month-display"></div>
+        <div>
+            <button id="back-btn">Previous Month</button>
+            <button id="next-btn">Next Month</button>
+        </div>
+    </div>
 
+    <div id="weekdays">
+        <div>Sunday</div>
+        <div>Monday</div>
+        <div>Tuesday</div>
+        <div>Wednesday</div>
+        <div>Thursday</div>
+        <div>Friday</div>
+        <div>Saturday</div>
+    </div>
+
+    <div id="calendar"></div>
+</div>
+
+<div id="new-event-modal">
+    <h2 class="center">New Event</h2>
+    <input id="eventTitleInput" placeholder="Event Title">
+    <button id="save-btn">Save</button>
+    <button id="cancel-btn">Cancel</button>
+</div>
+
+<div id="modal-back-drop"></div>
 
 {% endblock %}   

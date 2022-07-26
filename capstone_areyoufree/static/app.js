@@ -1,42 +1,90 @@
-Vue.component('month-indicator', {
-    // template:
-    //     <div>
-    //         {{ selectedMonth }}
-    //     </div>
-    // ,
-})
+let nav = 0;        //nav will keep track of the month we are currently viewing
+let clicked = null
+let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : []
 
-Vue.component('month-selector',{
-    // template:
-    // <div>
-    //     {/* calendar date selector (pagination between months) */}
-    // </div>
-})
+let calendar = document.getElementById('calendar')
+let newEvent = document.getElementById('new-event-modal')
+let backDrop = document.getElementById('modal-back-drop')
+let weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-Vue.component('weekdays', {
-    template:
-        `<div>
-            <p>date.day()</p>
-        </div>`
-})
+function openModal(date) {
+    clicked = date
 
-Vue.component('day', {
-    // template:
-    // <div>
-    //     {/* shows single day of the month */}
-    // </div>
-})
+    let eventForDay = events.find(e => e.date === clicked)
+    // add save and cancel buttons for event (if event exists)
+    if (eventForDay) {
 
-
-new Vue ({
-    el: '#app',
-    data: {
-    },
-    methods: {
-
+    } else {
+        // if event doesn't exist
+        newEvent.style.display = 'block'
     }
-})
 
-let date = dayjs()
+    backDrop.style.display = 'block'
+}
 
-console.log(date.day(0))
+function load() {
+    let date = new Date()
+
+    if (nav !== 0) {
+        date.setMonth(new Date().getMonth() + nav)      // uses counter to help with month navigation
+    }
+
+    //get current day, month, and year
+    let day = date.getDate()
+    let month = date.getMonth()
+    let year = date.getFullYear()
+
+    let firstDayOfTheMonth = new Date(year, month, 1)
+    let daysInMonth = new Date(year, month + 1, 0).getDate()      //finds how many days are in a month
+    let dateString = firstDayOfTheMonth.toLocaleDateString('en-us', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+    })
+
+    let paddingDays = weekdays.indexOf(dateString.split(', ')[0])  //grabs the day of the week from dateString to determine number of paddingdays
+
+    document.getElementById('month-display').innerText = `${date.toLocaleDateString('en-us', {month: 'long'})} ${year}`
+
+    calendar.innerHTML = ''     // used to delete month when navigating to previous/next month
+
+    for(let i = 1; i <= paddingDays + daysInMonth; i++) {
+        let dayBox = document.createElement('div')      //creates a box for each day of the month (in a div)
+        dayBox.classList.add('day')
+
+        // Determine if a padding day or an actual day is rendered
+        if (i > paddingDays) {
+            //specify dayBox
+            dayBox.innerText = i - paddingDays
+
+            //allow for user to click on dayBox (to create event!!!!!!!)
+            dayBox.addEventListener('click', () => openModal(`${month + 1}/${i - paddingDays}/${year}`))
+        } else {
+            //specify padding day
+            dayBox.classList.add('padding')
+        }
+
+        calendar.appendChild(dayBox)
+    }
+
+    console.log(paddingDays)
+
+}
+
+function initButtons() {
+    // Have next button navigate to the next month
+    document.getElementById('next-btn').addEventListener('click', () => {
+        nav++
+        load()
+    })
+    
+    // Have back button navigate to the previous month
+    document.getElementById('back-btn').addEventListener('click', () => {
+        nav--
+        load()
+    })
+}
+
+initButtons()
+load()
