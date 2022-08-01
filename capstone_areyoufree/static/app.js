@@ -1,153 +1,129 @@
-let nav = 0;        //nav will keep track of the month we are currently viewing
-let clicked = null
-let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : []
+// Header Component for Calendar
+Vue.component('calendar', {
+    data: function () {
+        return {
 
-let calendar = document.getElementById('calendar')
-let newEvent = document.getElementById('new-event-modal')
-let deleteEventModal = document.getElementById('delete-modal')
-let backDrop = document.getElementById('modal-back-drop')
-let eventTitleInput = document.getElementById('event-title-input')
-let startTimeInput = document.getElementById('start-time-input')
-let endtTimeInput = document.getElementById('end-time-input')
-let eventNotes = document.getElementById('event-notes')
-let weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-
-function openModal(date) {
-    clicked = date
-
-    let eventForDay = events.find(e => e.date === clicked)
-    // add save and cancel buttons for event (if event exists)
-    if (eventForDay) {
-        document.getElementById('event-title').innerText = eventForDay.title
-        document.getElementById('event-start-time'). innerText = eventForDay.startTime
-        document.getElementById('event-end-time'). innerText = eventForDay.endTime
-        document.getElementById('event-notes-sec'). innerText = eventForDay.notes
-        deleteEventModal.style.display = 'block'
-    } else {
-        // if event doesn't exist
-        newEvent.style.display = 'block'
-    }
-
-    backDrop.style.display = 'block'
-}
-
-function load() {
-    let date = new Date()
-
-    if (nav !== 0) {
-        date.setMonth(new Date().getMonth() + nav)      // uses counter to help with month navigation
-    }
-
-    //get current day, month, and year
-    let day = date.getDate()
-    let month = date.getMonth()
-    let year = date.getFullYear()
-
-    let firstDayOfTheMonth = new Date(year, month, 1)
-    let daysInMonth = new Date(year, month + 1, 0).getDate()      //finds how many days are in a month
-    let dateString = firstDayOfTheMonth.toLocaleDateString('en-us', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-    })
-
-    let paddingDays = weekdays.indexOf(dateString.split(', ')[0])  //grabs the day of the week from dateString to determine number of paddingdays
-
-    document.getElementById('month-display').innerText = `${date.toLocaleDateString('en-us', {month: 'long'})} ${year}`
-
-    calendar.innerHTML = ''     // used to delete month when navigating to previous/next month
-
-    for(let i = 1; i <= paddingDays + daysInMonth; i++) {
-        let dayBox = document.createElement('div')      //creates a box for each day of the month (in a div)
-        dayBox.classList.add('day')
-
-        let dayString = `${month + 1}/${i - paddingDays}/${year}`
-
-        // Determine if a padding day or an actual day is rendered
-        if (i > paddingDays) {
-            //specify dayBox
-            dayBox.innerText = i - paddingDays
-
-            let eventForDay = events.find(e => e.date === dayString)
-
-            if (i - paddingDays === day && nav === 0) {
-                dayBox.id = 'current-day'
-            }
-
-            if (eventForDay) {
-                let eventDiv = document.createElement('div')
-                eventDiv.classList.add('event')
-                eventDiv.innerText = eventForDay.startTime + ': ' + eventForDay.title
-                dayBox.appendChild(eventDiv)
-            }
-
-            //allow for user to click on dayBox (to create event!!!!!!!)
-            dayBox.addEventListener('click', () => openModal(dayString))
-        } else {
-            //specify padding day
-            dayBox.classList.add('padding')
         }
+    },
+    template: `
 
-        calendar.appendChild(dayBox)
+    `,
+    methods: {
+        
     }
+})
 
-    console.log(paddingDays)
 
-}
+new Vue ({
+    el: '#app',
+    delimiters: ['[[', ']]'],
+    data: {
+        nav: 0,
+        clicked: null,
+        events: [],
+        days: [],
+        weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    },
+    methods:{
+        openModal(date) {
+            clicked = date
 
-function closeModal() {
-    eventTitleInput.classList.remove('error')
-    newEvent.style.display = 'none'
-    deleteEventModal.style.display = 'none'
-    backDrop.style.display = 'none'
-    eventTitleInput.value = ''
-    clicked = null
-    load()
-}
+            if (clicked) {
+                document.getElementById('new-event-modal').style.display = 'block'
+            }
+            document.getElementById('modal-back-drop').style.display = 'block'
+        },  
+        
+        load: function() {
+            let date = new Date()
 
-function saveEvent() {
-    if (eventTitleInput.value) {
-        eventTitleInput.classList.remove('error')
-        events.push({
-            date: clicked,
-            title: eventTitleInput.value,
-            startTime: startTimeInput.value,
-            endTime: endtTimeInput.value,
-            notes: eventNotes.value,
-        })
+            if (this.nav !== 0) {
+                date.setMonth(new Date().getMonth() + this.nav)
+            }
 
-        localStorage.setItem('events', JSON.stringify(events))
-        closeModal()
-    } else {
-        eventTitleInput.classList.add('error')
+            // get current day, month, and year
+            let day = date.getDate()
+            let month = date.getMonth()
+            let year = date.getFullYear()
+            
+            let firstDayOfTheMonth = new Date(year, month, 1)
+            let daysInMonth = new Date(year, month + 1, 0).getDate()        // finds how many days are in a month
+            
+            let dateString = firstDayOfTheMonth.toLocaleDateString('en-us', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+            })
+
+            let paddingDays = this.weekdays.indexOf(dateString.split(', ')[0])   // grabs the day of the week from dateString to determine the number of padding days needed
+
+            document.getElementById('month-display').innerText = `${date.toLocaleDateString('en-us', {month: 'long'})} ${year}`
+
+            calendar.innerHTML = ''     // will reset calendar every time it is loaded so there aren't multiple calendars
+
+
+            for (i = 1; i <= paddingDays + daysInMonth; i++) {
+                let dayBox = document.createElement('div')
+                dayBox.classList.add('day')
+
+                let dayString = `${month + 1}/${i - paddingDays}/${year}`
+
+                // determine whether a padding day or an actually day should show on the calendar in that box
+                if (i > paddingDays) {
+                    dayBox.innerText = i - paddingDays
+
+                    if (i - paddingDays === day && this.nav === 0) {
+                        dayBox.id = 'current-day'
+                    }
+
+                    dayBox.onclick = () => {
+                        this.openModal(dayString)
+                    }
+
+                } else {
+                    dayBox.classList.add('padding')
+                }
+                document.getElementById('calendar').appendChild(dayBox)
+            }
+        },
+
+        closeModal: function() {
+            document.getElementById('new-event-modal').style.display = 'none'
+            document.getElementById('modal-back-drop').style.display = 'none'
+            document.getElementById('event-title-input').value = ''
+            clicked = null
+            this.load()
+        },
+
+        nextPage: function() {
+            this.nav++
+            this.load()
+        },
+
+        backPage: function() {
+            this.nav--
+            this.load()
+        },
+
+        saveBtn: function() {
+            if (document.getElementById('event-title-input').value) {
+                this.events.push({
+                    title: document.getElementById('event-title-input').value,
+                    startTime: document.getElementById('start-time-input').value,
+                    endTime: document.getElementById('end-time-input').value,
+                    notes: document.getElementById('event-notes').value,
+                })
+            }
+            console.log(this.events)
+        },
+
+        cancelBtn: function() {
+      
+        }
+    },
+
+    mounted: function() {
+        this.load()
     }
-}
-
-function deleteEvent() {
-    events = events.filter(e => e.date !== clicked)
-    localStorage.setItem('events', JSON.stringify(events))
-    closeModal()
-}
-
-function initButtons() {
-    // Have next button navigate to the next month
-    document.getElementById('next-btn').addEventListener('click', () => {
-        nav++
-        load()
-    })
-    
-    // Have back button navigate to the previous month
-    document.getElementById('back-btn').addEventListener('click', () => {
-        nav--
-        load()
-    })
-
-    document.getElementById('save-btn').addEventListener('click', saveEvent)
-    document.getElementById('cancel-btn').addEventListener('click', closeModal)
-    document.getElementById('delete-btn').addEventListener('click', deleteEvent)
-    document.getElementById('close-btn').addEventListener('click', closeModal)
-}
-
-initButtons()
-load()
+})
