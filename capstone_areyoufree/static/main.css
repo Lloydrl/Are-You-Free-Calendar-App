@@ -47,7 +47,7 @@ h1{
         /* ids */
     #app {
         display: flex;
-        margin-top: 50px;
+        margin-top: 30px;
         justify-content: center;
         /* color */
     }
@@ -74,6 +74,7 @@ h1{
     #weekdays {
         width: 100%;
         display: flex;
+        justify-content: space-around;
         /* color */
     }
 

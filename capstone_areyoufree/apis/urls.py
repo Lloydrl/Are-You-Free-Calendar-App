@@ -1,6 +1,13 @@
 from django.urls import path
-from .views import UserListAPI
+from .views import EventViewSet, UserViewSet, CurrentUserView
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path('', UserListAPI.as_view()),
+router = DefaultRouter()
+router.register('events', EventViewSet, basename = 'events')
+router.register('users', UserViewSet, basename = 'users')
+
+
+urlpatterns = router.urls + [
+    path('currentuser/', CurrentUserView.as_view()),
+    
 ]
