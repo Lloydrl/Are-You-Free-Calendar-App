@@ -32,11 +32,11 @@ Make sure you have Python and Pipenv installed on your computer
 
 1. Clone the repo
 2. Navigate to the capstone_areyoufree folder in the terminal
-3. pipenv install to create virtual environment and install dependencies
-4. pipenv sheel to enter the new virtual environment
-5. python manage.py migrate users This app uses a custom user model so you MUST migrate the users app before migrating the rest!
-6. python manage.py migrate Migrate all other models
-7. python manage.py runserver Runserver and create an account to login to your own personal calendar!
+3. `pipenv install` to create virtual environment and install dependencies
+4. `pipenv shell` to enter the new virtual environment
+5. `python manage.py migrate users` This app uses a custom user model so you MUST migrate the users app before migrating the rest!
+6. `python manage.py migrate` Migrate all other models
+7. `python manage.py runserver` Runserver and create an account to login to your own personal calendar!
 
 
 
