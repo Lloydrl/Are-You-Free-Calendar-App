@@ -9,7 +9,7 @@ Are You Free? is a calendar app where you can create events to keep track of you
 
 - Allows users to add events/appointments to their personal calendar
 
-Libraries/Frameworks To Be Used:
+Frameworks Used:
 - Django Rest Framework
 - Vue
 - Javascript
